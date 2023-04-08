@@ -1,11 +1,11 @@
 "use strict";
 
 // Class definition
-var KTBarangsList = function () {
+var KTPemasoksList = function () {
     var datatable;
     var table
 
-    var initBarangList = function () {
+    var initPemasokList = function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -32,7 +32,7 @@ var KTBarangsList = function () {
             },
             ajax: {
                 type: "POST",
-                url: "/data-barang/list"
+                url: "/pemasok/list"
             },
             columns: [
                 {
@@ -44,12 +44,12 @@ var KTBarangsList = function () {
                     data: 'nama',
                 },
                 {
-                    name: 'harga',
-                    data: 'harga',
+                    name: 'email',
+                    data: 'email',
                 },
                 {
-                    name: 'satuan',
-                    data: 'satuan',
+                    name: 'alamat',
+                    data: 'alamat',
                 },
                 {
                     name: 'action',
@@ -67,7 +67,7 @@ var KTBarangsList = function () {
     }
 
     var handleSearchDatatable = () => {
-        const filterSearch = document.querySelector('[data-kt-barang-table-filter="search"]');
+        const filterSearch = document.querySelector('[data-kt-pemasok-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             datatable.search(e.target.value).draw();
         });
@@ -75,7 +75,7 @@ var KTBarangsList = function () {
 
     var handleDeleteRows = () => {
         // Select all delete buttons
-        const deleteButtons = table.querySelectorAll('[data-kt-barang-table-filter="delete_row"]');
+        const deleteButtons = table.querySelectorAll('[data-kt-pemasok-table-filter="delete_row"]');
 
         deleteButtons.forEach(d => {
             // Delete button on click
@@ -86,12 +86,12 @@ var KTBarangsList = function () {
                 const parent = e.target.closest('tr');
                 const kode = $(this).data('kode');
 
-                // Get barang name
-                const barangName = parent.querySelectorAll('td')[0].innerText;
+                // Get pemasok name
+                const pemasokName = parent.querySelectorAll('td')[0].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete " + barangName + "?",
+                    text: "Are you sure you want to delete " + pemasokName + "?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -105,7 +105,7 @@ var KTBarangsList = function () {
                     if (result.value) {
                         $.ajax({
                             type: "DELETE",
-                            url: `/data-barang/${kode}/destroy`,
+                            url: `/pemasok/${kode}/destroy`,
                             dataType: "JSON",
                             success: function (response) {
                                 Swal.fire({
@@ -123,7 +123,7 @@ var KTBarangsList = function () {
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: barangName + " was not deleted.",
+                            text: pemasokName + " was not deleted.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -139,13 +139,13 @@ var KTBarangsList = function () {
 
     return {
         init: function () {
-            table = document.querySelector('#kt_barang_table');
+            table = document.querySelector('#kt_pemasok_table');
 
             if (!table) {
                 return;
             }
 
-            initBarangList();
+            initPemasokList();
             handleSearchDatatable();
             handleDeleteRows();
         }
@@ -154,5 +154,5 @@ var KTBarangsList = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTBarangsList.init();
+    KTPemasoksList.init();
 });

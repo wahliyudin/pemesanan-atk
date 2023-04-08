@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\SatuanController;
 use App\Models\Pegawai;
 use Illuminate\Support\Facades\Auth;
@@ -42,4 +43,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pegawai/list', [PegawaiController::class, 'list'])->name('pegawai.list');
     Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
     Route::delete('/pegawai/{pegawai}/destroy', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
+
+    Route::get('/pemasok', [PemasokController::class, 'index'])->name('pemasok');
+    Route::post('/pemasok/list', [PemasokController::class, 'list'])->name('pemasok.list');
+    Route::post('/pemasok/store', [PemasokController::class, 'store'])->name('pemasok.store');
+    Route::delete('/pemasok/{pemasok}/destroy', [PemasokController::class, 'destroy'])->name('pemasok.destroy');
 });
