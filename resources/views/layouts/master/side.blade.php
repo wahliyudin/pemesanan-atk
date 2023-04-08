@@ -32,7 +32,8 @@
                 data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer">
 
                 <div class="menu-item">
-                    <a class="menu-link active" href="" target="_blank">
+                    <a class="menu-link  {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                        href="{{ route('dashboard') }}">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -49,6 +50,28 @@
                             </span>
                         </span>
                         <span class="menu-title">Dashboard</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('data-barang') ? 'active' : '' }}"
+                        href="{{ route('data-barang') }}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+                            <span class="svg-icon svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M21 9V11C21 11.6 20.6 12 20 12H14V8H20C20.6 8 21 8.4 21 9ZM10 8H4C3.4 8 3 8.4 3 9V11C3 11.6 3.4 12 4 12H10V8Z"
+                                        fill="currentColor"></path>
+                                    <path d="M15 2C13.3 2 12 3.3 12 5V8H15C16.7 8 18 6.7 18 5C18 3.3 16.7 2 15 2Z"
+                                        fill="currentColor"></path>
+                                    <path opacity="0.3"
+                                        d="M9 2C10.7 2 12 3.3 12 5V8H9C7.3 8 6 6.7 6 5C6 3.3 7.3 2 9 2ZM4 12V21C4 21.6 4.4 22 5 22H10V12H4ZM20 12V21C20 21.6 19.6 22 19 22H14V12H20Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">Data Barang</span>
                     </a>
                 </div>
             </div>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('kode')->primary();
             $table->string('nama');
             $table->bigInteger('harga');
-            $table->string('kode_satuan');
+            $table->string('satuan_kode');
             $table->timestamps();
         });
     }
