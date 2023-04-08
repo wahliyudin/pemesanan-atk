@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\StokController;
 use App\Models\Pegawai;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,4 +49,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pemasok/list', [PemasokController::class, 'list'])->name('pemasok.list');
     Route::post('/pemasok/store', [PemasokController::class, 'store'])->name('pemasok.store');
     Route::delete('/pemasok/{pemasok}/destroy', [PemasokController::class, 'destroy'])->name('pemasok.destroy');
+
+    Route::get('/stok', [StokController::class, 'index'])->name('stok');
+    Route::post('/stok/list', [StokController::class, 'list'])->name('stok.list');
+    Route::post('/stok/store', [StokController::class, 'store'])->name('stok.store');
+    Route::delete('/stok/{stok}/destroy', [StokController::class, 'destroy'])->name('stok.destroy');
 });
