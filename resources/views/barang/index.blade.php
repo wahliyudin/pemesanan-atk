@@ -139,54 +139,47 @@
 
                             <!--begin::Modal body-->
                             <div class="modal-body py-10 px-lg-17">
-                                <!--begin::Scroll-->
-                                <div class="scroll-y me-n7 pe-7" id="kt_modal_add_barang_scroll" data-kt-scroll="true"
-                                    data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-                                    data-kt-scroll-dependencies="#kt_modal_add_barang_header"
-                                    data-kt-scroll-wrappers="#kt_modal_add_barang_scroll" data-kt-scroll-offset="300px">
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Nama</label>
-                                        <!--end::Label-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-semibold mb-2">Nama</label>
+                                    <!--end::Label-->
 
-                                        <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" name="nama" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Harga</label>
-                                        <!--end::Label-->
-
-                                        <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" name="harga"
-                                            id="harga" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-15">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold mb-2">Satuan</label>
-                                        <!--end::Label-->
-
-                                        <!--begin::Input-->
-                                        <select class="form-select form-select-solid" data-control="select2"
-                                            data-hide-search="true" name="satuan">
-                                            @foreach ($satuan as $item)
-                                                <option value="{{ $item->kode }}">{{ $item->nama }}</option>
-                                            @endforeach
-                                        </select>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" name="nama" />
+                                    <!--end::Input-->
                                 </div>
-                                <!--end::Scroll-->
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-semibold mb-2">Harga</label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" name="harga"
+                                        id="harga" />
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-15">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold mb-2">Satuan</label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Input-->
+                                    <select class="form-select form-select-solid" data-control="select2"
+                                        data-dropdown-parent="#kt_modal_add_barang" name="satuan">
+                                        @foreach ($satuan as $item)
+                                            <option value="{{ $item->kode }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
                             </div>
                             <!--end::Modal body-->
 
