@@ -67,10 +67,11 @@ var KTModalpemasokAdd = function () {
                     if (status == 'Valid') {
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         submitButton.disabled = true;
+                        var kode = $(submitButton).data('kode');
 
                         $.ajax({
-                            type: "POST",
-                            url: "/pemasok/store",
+                            type: kode ? "PUT" : "POST",
+                            url: kode ? `/pemasok/${kode}/update` : "/pemasok/store",
                             data: {
                                 nama: form.querySelector('[name="nama"]').value,
                                 telpon: form.querySelector('[name="telpon"]').value,
@@ -92,8 +93,7 @@ var KTModalpemasokAdd = function () {
                                 }).then(function (result) {
                                     if (result.isConfirmed) {
                                         // Hide modal
-                                        modal.hide();
-                                        form.reset();
+                                        $('#kt_modal_add_pemasok').modal('hide');
 
                                         submitButton.disabled = false;
 
@@ -181,7 +181,16 @@ var KTModalpemasokAdd = function () {
                     });
                 }
             });
-        })
+        });
+
+        $('.add_pemasok').click(function (e) {
+            e.preventDefault();
+            $(submitButton).data('kode', '');
+            $(form.querySelector('[name="nama"]')).val('');
+            $(form.querySelector('[name="alamat"]')).val('');
+            $(form.querySelector('[name="telpon"]')).val('');
+            $(form.querySelector('[name="email"]')).val('');
+        });
     }
 
     return {

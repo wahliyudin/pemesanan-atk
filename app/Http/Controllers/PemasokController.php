@@ -41,6 +41,38 @@ class PemasokController extends Controller
         }
     }
 
+    public function edit(Pemasok $pemasok)
+    {
+        try {
+            return response()->json([
+                'kode' => $pemasok->getKey(),
+                'nama' => $pemasok->nama,
+                'alamat' => $pemasok->alamat,
+                'telpon' => $pemasok->telpon,
+                'email' => $pemasok->email,
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function update(Request $request, Pemasok $pemasok)
+    {
+        try {
+            $pemasok->update([
+                'nama' => $request->nama,
+                'alamat' => $request->alamat,
+                'telpon' => $request->telpon,
+                'email' => $request->email,
+            ]);
+            return response()->json([
+                'message' => 'Successfully Updated'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
     public function destroy(Pemasok $pemasok)
     {
         try {

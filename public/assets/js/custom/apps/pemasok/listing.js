@@ -3,7 +3,9 @@
 // Class definition
 var KTPemasoksList = function () {
     var datatable;
-    var table
+    var table;
+    var form;
+    var submitButton;
 
     var initPemasokList = function () {
         $.ajaxSetup({
@@ -63,6 +65,7 @@ var KTPemasoksList = function () {
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         datatable.on('draw', function () {
             handleDeleteRows();
+            handleEditRows();
         });
     }
 
@@ -137,10 +140,35 @@ var KTPemasoksList = function () {
         });
     }
 
+    var handleEditRows = () => {
+        const editButtons = table.querySelectorAll('[data-kt-pemasok-table-filter="edit_row"]');
+
+        editButtons.forEach(d => {
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+                var kode = $(this).data('kode');
+                $.ajax({
+                    type: "GET",
+                    url: `/pemasok/${kode}/edit`,
+                    dataType: "JSON",
+                    success: function (response) {
+                        $(form.querySelector('[name="nama"]')).val(response.nama);
+                        $(form.querySelector('[name="alamat"]')).val(response.alamat);
+                        $(form.querySelector('[name="telpon"]')).val(response.telpon);
+                        $(form.querySelector('[name="email"]')).val(response.email);
+                        $(submitButton).data('kode', kode);
+                        $('#kt_modal_add_pemasok').modal('show');
+                    }
+                });
+            })
+        });
+    }
+
     return {
         init: function () {
             table = document.querySelector('#kt_pemasok_table');
-
+            form = document.querySelector('#kt_modal_add_pemasok_form');
+            submitButton = form.querySelector('#kt_modal_add_pemasok_submit');
             if (!table) {
                 return;
             }
@@ -148,6 +176,7 @@ var KTPemasoksList = function () {
             initPemasokList();
             handleSearchDatatable();
             handleDeleteRows();
+            handleEditRows();
         }
     }
 }();

@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pemasok', [PemasokController::class, 'index'])->name('pemasok');
     Route::post('/pemasok/list', [PemasokController::class, 'list'])->name('pemasok.list');
     Route::post('/pemasok/store', [PemasokController::class, 'store'])->name('pemasok.store');
+    Route::get('/pemasok/{pemasok}/edit', [PemasokController::class, 'edit'])->name('pemasok.edit');
+    Route::put('/pemasok/{pemasok}/update', [PemasokController::class, 'update'])->name('pemasok.update');
     Route::delete('/pemasok/{pemasok}/destroy', [PemasokController::class, 'destroy'])->name('pemasok.destroy');
 
     Route::get('/stok', [StokController::class, 'index'])->name('stok');
