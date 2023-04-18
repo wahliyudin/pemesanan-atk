@@ -61,7 +61,7 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-barang-table-toolbar="base">
                             <!--begin::Add barang-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary add_barang" data-bs-toggle="modal"
                                 data-bs-target="#kt_modal_add_barang">
                                 Add Barang
                             </button>
@@ -158,7 +158,7 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="harga"
+                                    <input type="text" class="form-control form-control-solid uang" name="harga"
                                         id="harga" />
                                     <!--end::Input-->
                                 </div>
@@ -173,6 +173,7 @@
                                     <!--begin::Input-->
                                     <select class="form-select form-select-solid" data-control="select2"
                                         data-dropdown-parent="#kt_modal_add_barang" name="satuan">
+                                        <option disabled selected value="">- Pilih -</option>
                                         @foreach ($satuan as $item)
                                             <option value="{{ $item->kode }}">{{ $item->nama }}</option>
                                         @endforeach
@@ -218,9 +219,10 @@
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/apps/barang/listing.js') }}"></script>
     <script src="{{ asset('assets/js/custom/apps/barang/add.js') }}"></script>
+    <script src="https://cdn.rawgit.com/igorescobar/jQuery-Mask-Plugin/1ef022ab/dist/jquery.mask.min.js"></script>
     <script>
-        Inputmask({
-            "mask": "999.999.999.999"
-        }).mask("#harga");
+        $('.uang').mask('0.000.000.000', {
+            reverse: true
+        });
     </script>
 @endpush

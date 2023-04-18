@@ -38,11 +38,41 @@ class BarangController extends Controller
         try {
             Barang::query()->create([
                 'nama' => $request->nama,
-                'harga' => (int) str($request->harga)->replace('___', '')->replace('.', '')->value(),
+                'harga' => (int) str($request->harga)->replace('.', '')->value(),
                 'satuan_kode' => $request->satuan_kode,
             ]);
             return response()->json([
                 'message' => 'Successfully'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function edit(Barang $barang)
+    {
+        try {
+            return response()->json([
+                'kode' => $barang->getKey(),
+                'nama' => $barang->nama,
+                'harga' => number_format($barang->harga, 0, ',', '.'),
+                'satuan_kode' => $barang->satuan_kode,
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function update(Request $request, Barang $barang)
+    {
+        try {
+            $barang->update([
+                'nama' => $request->nama,
+                'harga' => (int) str($request->harga)->replace('.', '')->value(),
+                'satuan_kode' => $request->satuan_kode,
+            ]);
+            return response()->json([
+                'message' => 'Successfully Updated'
             ]);
         } catch (\Throwable $th) {
             throw $th;

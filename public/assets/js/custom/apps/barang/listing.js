@@ -3,7 +3,9 @@
 // Class definition
 var KTBarangsList = function () {
     var datatable;
-    var table
+    var table;
+    var form;
+    var submitButton;
 
     var initBarangList = function () {
         $.ajaxSetup({
@@ -63,6 +65,7 @@ var KTBarangsList = function () {
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         datatable.on('draw', function () {
             handleDeleteRows();
+            handleEditRows();
         });
     }
 
@@ -137,10 +140,34 @@ var KTBarangsList = function () {
         });
     }
 
+    var handleEditRows = () => {
+        const editButtons = table.querySelectorAll('[data-kt-barang-table-filter="edit_row"]');
+
+        editButtons.forEach(d => {
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+                var kode = $(this).data('kode');
+                $.ajax({
+                    type: "GET",
+                    url: `/data-barang/${kode}/edit`,
+                    dataType: "JSON",
+                    success: function (response) {
+                        $(form.querySelector('[name="nama"]')).val(response.nama);
+                        $(form.querySelector('[name="harga"]')).val(response.harga);
+                        $(form.querySelector('[name="satuan"]')).val(response.satuan_kode).trigger('change');
+                        $(submitButton).data('kode', kode);
+                        $('#kt_modal_add_barang').modal('show');
+                    }
+                });
+            })
+        });
+    }
+
     return {
         init: function () {
             table = document.querySelector('#kt_barang_table');
-
+            form = document.querySelector('#kt_modal_add_barang_form');
+            submitButton = form.querySelector('#kt_modal_add_barang_submit');
             if (!table) {
                 return;
             }
@@ -148,6 +175,7 @@ var KTBarangsList = function () {
             initBarangList();
             handleSearchDatatable();
             handleDeleteRows();
+            handleEditRows();
         }
     }
 }();

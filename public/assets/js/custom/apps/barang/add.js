@@ -65,10 +65,11 @@ var KTModalbarangAdd = function () {
                     if (status == 'Valid') {
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         submitButton.disabled = true;
+                        var kode = $(submitButton).data('kode');
 
                         $.ajax({
-                            type: "POST",
-                            url: "/data-barang/store",
+                            type: kode ? "PUT" : "POST",
+                            url: kode ? `/data-barang/${kode}/update` : "/data-barang/store",
                             data: {
                                 nama: form.querySelector('[name="nama"]').value,
                                 harga: form.querySelector('[name="harga"]').value,
@@ -89,8 +90,7 @@ var KTModalbarangAdd = function () {
                                 }).then(function (result) {
                                     if (result.isConfirmed) {
                                         // Hide modal
-                                        modal.hide();
-                                        form.reset();
+                                        $('#kt_modal_add_barang').modal('hide');
 
                                         submitButton.disabled = false;
 
@@ -179,6 +179,14 @@ var KTModalbarangAdd = function () {
                 }
             });
         })
+
+        $('.add_barang').click(function (e) {
+            e.preventDefault();
+            $(submitButton).data('kode', '');
+            $(form.querySelector('[name="nama"]')).val('');
+            $(form.querySelector('[name="harga"]')).val('');
+            $(form.querySelector('[name="satuan"]')).val('').trigger('change');
+        });
     }
 
     return {

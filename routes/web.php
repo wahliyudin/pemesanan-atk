@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/data-barang', [BarangController::class, 'index'])->name('data-barang');
     Route::post('/data-barang/list', [BarangController::class, 'list'])->name('data-barang.list');
     Route::post('/data-barang/store', [BarangController::class, 'store'])->name('data-barang.store');
+    Route::get('/data-barang/{barang}/edit', [BarangController::class, 'edit'])->name('data-barang.edit');
+    Route::put('/data-barang/{barang}/update', [BarangController::class, 'update'])->name('data-barang.update');
     Route::delete('/data-barang/{barang}/destroy', [BarangController::class, 'destroy'])->name('data-barang.destroy');
 
     Route::get('/satuan', [SatuanController::class, 'index'])->name('satuan');
