@@ -3,7 +3,9 @@
 // Class definition
 var KTStoksList = function () {
     var datatable;
-    var table
+    var table;
+    var form;
+    var submitButton;
 
     var initStokList = function () {
         $.ajaxSetup({
@@ -59,6 +61,7 @@ var KTStoksList = function () {
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         datatable.on('draw', function () {
             handleDeleteRows();
+            handleEditRows();
         });
     }
 
@@ -133,10 +136,33 @@ var KTStoksList = function () {
         });
     }
 
+    var handleEditRows = () => {
+        const editButtons = table.querySelectorAll('[data-kt-stok-table-filter="edit_row"]');
+
+        editButtons.forEach(d => {
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+                var kode = $(this).data('kode');
+                $.ajax({
+                    type: "GET",
+                    url: `/stok/${kode}/edit`,
+                    dataType: "JSON",
+                    success: function (response) {
+                        form.querySelector('[name="barang"]').value = response.barang_kode;
+                        form.querySelector('[name="kuantitas"]').value = response.kuantitas;
+                        $(submitButton).data('kode', kode);
+                        $('#kt_modal_add_stok').modal('show');
+                    }
+                });
+            })
+        });
+    }
+
     return {
         init: function () {
             table = document.querySelector('#kt_stok_table');
-
+            form = document.querySelector('#kt_modal_add_stok_form');
+            submitButton = form.querySelector('#kt_modal_add_stok_submit');
             if (!table) {
                 return;
             }
@@ -144,6 +170,7 @@ var KTStoksList = function () {
             initStokList();
             handleSearchDatatable();
             handleDeleteRows();
+            handleEditRows();
         }
     }
 }();

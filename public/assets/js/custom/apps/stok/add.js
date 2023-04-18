@@ -48,15 +48,14 @@ var KTModalstokAdd = function () {
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function (status) {
-                    console.log('validated!');
-
                     if (status == 'Valid') {
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         submitButton.disabled = true;
+                        var kode = $(submitButton).data('kode');
 
                         $.ajax({
-                            type: "POST",
-                            url: "/stok/store",
+                            type: kode ? "PUT" : "POST",
+                            url: kode ? `/stok/${kode}/update` : "/stok/store",
                             data: {
                                 barang: form.querySelector('[name="barang"]').value,
                                 kuantitas: form.querySelector('[name="kuantitas"]').value,
@@ -76,7 +75,7 @@ var KTModalstokAdd = function () {
                                 }).then(function (result) {
                                     if (result.isConfirmed) {
                                         // Hide modal
-                                        modal.hide();
+                                        $('#kt_modal_add_stok').modal('hide');
                                         form.reset();
 
                                         submitButton.disabled = false;
@@ -165,7 +164,12 @@ var KTModalstokAdd = function () {
                     });
                 }
             });
-        })
+        });
+
+        $('.add_stok').click(function (e) {
+            e.preventDefault();
+            $(submitButton).data('kode', '');
+        });
     }
 
     return {

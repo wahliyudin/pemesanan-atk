@@ -37,7 +37,35 @@ class StokController extends Controller
                 'kuantitas' => $request->kuantitas,
             ]);
             return response()->json([
-                'message' => 'Successfully'
+                'message' => 'Successfully Created'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function edit(Stok $stok)
+    {
+        try {
+            return response()->json([
+                'kode' => $stok->getKey(),
+                'barang_kode' => $stok->barang_kode,
+                'kuantitas' => $stok->kuantitas,
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function update(Request $request, Stok $stok)
+    {
+        try {
+            $stok->update([
+                'barang_kode' => $request->barang,
+                'kuantitas' => $request->kuantitas,
+            ]);
+            return response()->json([
+                'message' => 'Successfully Updated'
             ]);
         } catch (\Throwable $th) {
             throw $th;

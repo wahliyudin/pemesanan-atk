@@ -61,7 +61,7 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-stok-table-toolbar="base">
                             <!--begin::Add stok-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary add_stok" data-bs-toggle="modal"
                                 data-bs-target="#kt_modal_add_stok">
                                 Add Stok
                             </button>
@@ -176,7 +176,8 @@
                                 <!--end::Button-->
 
                                 <!--begin::Button-->
-                                <button type="submit" id="kt_modal_add_stok_submit" class="btn btn-primary">
+                                <button type="submit" id="kt_modal_add_stok_submit" data-kode=""
+                                    class="btn btn-primary">
                                     <span class="indicator-label">
                                         Submit
                                     </span>
@@ -206,5 +207,9 @@
         Inputmask({
             "mask": "999.999.999.999"
         }).mask("#harga");
+
+        $('#kt_stok_table').on('click', '[data-kt-stok-table-filter="edit_row"]', function() {
+            console.log($(this).data('kode'));
+        });
     </script>
 @endpush

@@ -53,5 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stok', [StokController::class, 'index'])->name('stok');
     Route::post('/stok/list', [StokController::class, 'list'])->name('stok.list');
     Route::post('/stok/store', [StokController::class, 'store'])->name('stok.store');
+    Route::get('/stok/{stok}/edit', [StokController::class, 'edit'])->name('stok.edit');
+    Route::put('/stok/{stok}/update', [StokController::class, 'update'])->name('stok.update');
     Route::delete('/stok/{stok}/destroy', [StokController::class, 'destroy'])->name('stok.destroy');
 });
