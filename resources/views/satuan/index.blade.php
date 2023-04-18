@@ -61,7 +61,7 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-satuan-table-toolbar="base">
                             <!--begin::Add satuan-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary add_satuan" data-bs-toggle="modal"
                                 data-bs-target="#kt_modal_add_satuan">
                                 Add Satuan
                             </button>

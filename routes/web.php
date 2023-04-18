@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/satuan', [SatuanController::class, 'index'])->name('satuan');
     Route::post('/satuan/list', [SatuanController::class, 'list'])->name('satuan.list');
     Route::post('/satuan/store', [SatuanController::class, 'store'])->name('satuan.store');
+    Route::get('/satuan/{satuan}/edit', [SatuanController::class, 'edit'])->name('satuan.edit');
+    Route::put('/satuan/{satuan}/update', [SatuanController::class, 'update'])->name('satuan.update');
     Route::delete('/satuan/{satuan}/destroy', [SatuanController::class, 'destroy'])->name('satuan.destroy');
 
     Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai');

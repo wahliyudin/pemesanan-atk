@@ -51,10 +51,11 @@ var KTModalsatuanAdd = function () {
                     if (status == 'Valid') {
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         submitButton.disabled = true;
+                        var kode = $(submitButton).data('kode');
 
                         $.ajax({
-                            type: "POST",
-                            url: "/satuan/store",
+                            type: kode ? "PUT" : "POST",
+                            url: kode ? `/satuan/${kode}/update` : "/satuan/store",
                             data: {
                                 nama: form.querySelector('[name="nama"]').value,
                             },
@@ -73,8 +74,7 @@ var KTModalsatuanAdd = function () {
                                 }).then(function (result) {
                                     if (result.isConfirmed) {
                                         // Hide modal
-                                        modal.hide();
-                                        form.reset();
+                                        $('#kt_modal_add_satuan').modal('hide');
 
                                         submitButton.disabled = false;
 
@@ -162,7 +162,13 @@ var KTModalsatuanAdd = function () {
                     });
                 }
             });
-        })
+        });
+
+        $('.add_satuan').click(function (e) {
+            e.preventDefault();
+            $(submitButton).data('kode', '');
+            $(form.querySelector('[name="nama"]')).val('');
+        });
     }
 
     return {

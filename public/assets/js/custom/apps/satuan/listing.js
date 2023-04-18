@@ -3,7 +3,9 @@
 // Class definition
 var KTSatuansList = function () {
     var datatable;
-    var table
+    var table;
+    var form;
+    var submitButton;
 
     var initSatuanList = function () {
         $.ajaxSetup({
@@ -54,6 +56,7 @@ var KTSatuansList = function () {
 
         datatable.on('draw', function () {
             handleDeleteRows();
+            handleEditRows();
         });
     }
 
@@ -128,10 +131,32 @@ var KTSatuansList = function () {
         });
     }
 
+    var handleEditRows = () => {
+        const editButtons = table.querySelectorAll('[data-kt-satuan-table-filter="edit_row"]');
+
+        editButtons.forEach(d => {
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+                var kode = $(this).data('kode');
+                $.ajax({
+                    type: "GET",
+                    url: `/satuan/${kode}/edit`,
+                    dataType: "JSON",
+                    success: function (response) {
+                        $(form.querySelector('[name="nama"]')).val(response.nama);
+                        $(submitButton).data('kode', kode);
+                        $('#kt_modal_add_satuan').modal('show');
+                    }
+                });
+            })
+        });
+    }
+
     return {
         init: function () {
             table = document.querySelector('#kt_satuan_table');
-
+            form = document.querySelector('#kt_modal_add_satuan_form');
+            submitButton = form.querySelector('#kt_modal_add_satuan_submit');
             if (!table) {
                 return;
             }
@@ -139,6 +164,7 @@ var KTSatuansList = function () {
             initSatuanList();
             handleSearchDatatable();
             handleDeleteRows();
+            handleEditRows();
         }
     }
 }();
