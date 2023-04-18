@@ -3,7 +3,9 @@
 // Class definition
 var KTPegawaisList = function () {
     var datatable;
-    var table
+    var table;
+    var form;
+    var submitButton;
 
     var initPegawaiList = function () {
         $.ajaxSetup({
@@ -79,6 +81,7 @@ var KTPegawaisList = function () {
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         datatable.on('draw', function () {
             handleDeleteRows();
+            handleEditRows();
         });
     }
 
@@ -153,10 +156,38 @@ var KTPegawaisList = function () {
         });
     }
 
+    var handleEditRows = () => {
+        const editButtons = table.querySelectorAll('[data-kt-pegawai-table-filter="edit_row"]');
+
+        editButtons.forEach(d => {
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+                var kode = $(this).data('kode');
+                $.ajax({
+                    type: "GET",
+                    url: `/pegawai/${kode}/edit`,
+                    dataType: "JSON",
+                    success: function (response) {
+                        $(form.querySelector('[name="nip"]')).val(response.nip);
+                        $(form.querySelector('[name="nama"]')).val(response.nama);
+                        $(form.querySelector('[name="jenis_kelamin"]')).val(response.jenis_kelamin).trigger('change');
+                        $(form.querySelector('[name="tempat_lahir"]')).val(response.tempat_lahir);
+                        $(form.querySelector('[name="tanggal_lahir"]')).val(response.tanggal_lahir);
+                        $(form.querySelector('[name="no_hp"]')).val(response.no_hp);
+                        $(form.querySelector('[name="alamat"]')).val(response.alamat);
+                        $(submitButton).data('kode', kode);
+                        $('#kt_modal_add_pegawai').modal('show');
+                    }
+                });
+            })
+        });
+    }
+
     return {
         init: function () {
             table = document.querySelector('#kt_pegawai_table');
-
+            form = document.querySelector('#kt_modal_add_pegawai_form');
+            submitButton = form.querySelector('#kt_modal_add_pegawai_submit');
             if (!table) {
                 return;
             }
@@ -164,6 +195,7 @@ var KTPegawaisList = function () {
             initPegawaiList();
             handleSearchDatatable();
             handleDeleteRows();
+            handleEditRows();
         }
     }
 }();

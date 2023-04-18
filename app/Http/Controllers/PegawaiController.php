@@ -19,7 +19,7 @@ class PegawaiController extends Controller
         $data = Pegawai::query()->get();
         return DataTables::of($data)
             ->editColumn('jenis_kelamin', function (Pegawai $pegawai) {
-                return $pegawai->jenis_kelamin;
+                return $pegawai->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki - Laki';
             })
             ->editColumn('tanggal_lahir', function (Pegawai $pegawai) {
                 return Carbon::make($pegawai->tanggal_lahir)->translatedFormat('d F Y');
@@ -45,6 +45,44 @@ class PegawaiController extends Controller
             ]);
             return response()->json([
                 'message' => 'Successfully'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function edit(Pegawai $pegawai)
+    {
+        try {
+            return response()->json([
+                'kode' => $pegawai->getKey(),
+                'nip' => $pegawai->nip,
+                'nama' => $pegawai->nama,
+                'jenis_kelamin' => $pegawai->jenis_kelamin,
+                'tempat_lahir' => $pegawai->tempat_lahir,
+                'tanggal_lahir' => $pegawai->tanggal_lahir,
+                'no_hp' => $pegawai->no_hp,
+                'alamat' => $pegawai->alamat,
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function update(Request $request, Pegawai $pegawai)
+    {
+        try {
+            $pegawai->update([
+                'nip' => $request->nip,
+                'nama' => $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'no_hp' => $request->no_hp,
+                'alamat' => $request->alamat,
+            ]);
+            return response()->json([
+                'message' => 'Successfully Updated'
             ]);
         } catch (\Throwable $th) {
             throw $th;

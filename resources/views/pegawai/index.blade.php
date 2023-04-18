@@ -61,7 +61,7 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-pegawai-table-toolbar="base">
                             <!--begin::Add pegawai-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary add_pegawai" data-bs-toggle="modal"
                                 data-bs-target="#kt_modal_add_pegawai">
                                 Add Pegawai
                             </button>
@@ -74,7 +74,7 @@
                 <!--end::Card header-->
 
                 <!--begin::Card body-->
-                <div class="card-body pt-0">
+                <div class="card-body pt-0" style="overflow-x: hidden;">
 
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_pegawai_table">
@@ -177,6 +177,7 @@
                                         <!--begin::Input-->
                                         <select class="form-select form-select-solid" data-control="select2"
                                             data-hide-search="true" name="jenis_kelamin">
+                                            <option selected disabled value="">- Pilih -</option>
                                             <option value="L">Laki - Laki</option>
                                             <option value="P">Perempuan</option>
                                         </select>

@@ -81,10 +81,11 @@ var KTModalpegawaiAdd = function () {
                     if (status == 'Valid') {
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         submitButton.disabled = true;
+                        var kode = $(submitButton).data('kode');
 
                         $.ajax({
-                            type: "POST",
-                            url: "/pegawai/store",
+                            type: kode ? "PUT" : "POST",
+                            url: kode ? `/pegawai/${kode}/update` : "/pegawai/store",
                             data: {
                                 nip: form.querySelector('[name="nip"]').value,
                                 nama: form.querySelector('[name="nama"]').value,
@@ -109,8 +110,7 @@ var KTModalpegawaiAdd = function () {
                                 }).then(function (result) {
                                     if (result.isConfirmed) {
                                         // Hide modal
-                                        modal.hide();
-                                        form.reset();
+                                        $('#kt_modal_add_pegawai').modal('hide');
 
                                         submitButton.disabled = false;
 
@@ -198,7 +198,19 @@ var KTModalpegawaiAdd = function () {
                     });
                 }
             });
-        })
+        });
+
+        $('.add_pegawai').click(function (e) {
+            e.preventDefault();
+            $(submitButton).data('kode', '');
+            $(form.querySelector('[name="nip"]')).val('');
+            $(form.querySelector('[name="nama"]')).val('');
+            $(form.querySelector('[name="jenis_kelamin"]')).val('').trigger('change');
+            $(form.querySelector('[name="tempat_lahir"]')).val('');
+            $(form.querySelector('[name="tanggal_lahir"]')).val('');
+            $(form.querySelector('[name="no_hp"]')).val('');
+            $(form.querySelector('[name="alamat"]')).val('');
+        });
     }
 
     return {
