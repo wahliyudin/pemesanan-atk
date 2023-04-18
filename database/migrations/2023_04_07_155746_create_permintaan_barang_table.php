@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('kode_permintaan');
             $table->string('kode_barang');
-            $table->integer('kuantitas');
+            $table->integer('volume');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
 
             $table->foreign('kode_permintaan')->references('kode')->on('permintaan')->cascadeOnDelete();
