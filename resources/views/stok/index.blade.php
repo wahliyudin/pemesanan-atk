@@ -146,6 +146,7 @@
                                     <!--begin::Input-->
                                     <select class="form-select form-select-solid" data-control="select2"
                                         data-dropdown-parent="#kt_modal_add_stok" name="barang">
+                                        <option disabled selected value="">- Pilih -</option>
                                         @foreach ($barang as $item)
                                             <option value="{{ $item->kode }}">{{ $item->nama }}</option>
                                         @endforeach
@@ -207,9 +208,5 @@
         Inputmask({
             "mask": "999.999.999.999"
         }).mask("#harga");
-
-        $('#kt_stok_table').on('click', '[data-kt-stok-table-filter="edit_row"]', function() {
-            console.log($(this).data('kode'));
-        });
     </script>
 @endpush

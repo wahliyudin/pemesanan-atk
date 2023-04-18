@@ -76,7 +76,8 @@ var KTModalstokAdd = function () {
                                     if (result.isConfirmed) {
                                         // Hide modal
                                         $('#kt_modal_add_stok').modal('hide');
-                                        form.reset();
+                                        // form.reset();
+
 
                                         submitButton.disabled = false;
 
@@ -169,6 +170,8 @@ var KTModalstokAdd = function () {
         $('.add_stok').click(function (e) {
             e.preventDefault();
             $(submitButton).data('kode', '');
+            $(form.querySelector('[name="barang"]')).val('').trigger('change');
+            $(form.querySelector('[name="kuantitas"]')).val('');
         });
     }
 
