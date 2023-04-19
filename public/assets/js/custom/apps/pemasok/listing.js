@@ -46,6 +46,10 @@ var KTPemasoksList = function () {
                     data: 'nama',
                 },
                 {
+                    name: 'telpon',
+                    data: 'telpon',
+                },
+                {
                     name: 'email',
                     data: 'email',
                 },
