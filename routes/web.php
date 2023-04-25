@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasokController;
+use App\Http\Controllers\PermintaanController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\StokController;
 use App\Models\Pegawai;
@@ -64,4 +65,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stok/{stok}/edit', [StokController::class, 'edit'])->name('stok.edit');
     Route::put('/stok/{stok}/update', [StokController::class, 'update'])->name('stok.update');
     Route::delete('/stok/{stok}/destroy', [StokController::class, 'destroy'])->name('stok.destroy');
+
+    Route::get('/permintaan', [PermintaanController::class, 'index'])->name('permintaan');
+    Route::post('/permintaan/list', [PermintaanController::class, 'list'])->name('permintaan.list');
 });

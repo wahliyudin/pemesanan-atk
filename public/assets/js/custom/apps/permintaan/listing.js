@@ -1,0 +1,171 @@
+"use strict";
+
+// Class definition
+var KTPermintaansList = function () {
+    var datatable;
+    var table;
+    var form;
+    var submitButton;
+
+    var initPermintaanList = function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        // Set date data order
+        const tableRows = table.querySelectorAll('tbody tr');
+
+        tableRows.forEach(row => {
+            const dateRow = row.querySelectorAll('td');
+            const realDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
+            dateRow[5].setAttribute('data-order', realDate);
+        });
+
+        datatable = $(table).DataTable({
+            searchDelay: 500,
+            processing: true,
+            serverSide: true,
+            order: [[0, 'asc']],
+            select: {
+                style: 'multi',
+                selector: 'td:first-child input[type="checkbox"]',
+                className: 'row-selected'
+            },
+            ajax: {
+                type: "POST",
+                url: "/permintaan/list"
+            },
+            columns: [
+                {
+                    name: 'kode',
+                    data: 'kode',
+                },
+                {
+                    name: 'action',
+                    data: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+        });
+
+        datatable.on('draw', function () {
+            handleDeleteRows();
+            handleEditRows();
+        });
+    }
+
+    var handleSearchDatatable = () => {
+        const filterSearch = document.querySelector('[data-kt-permintaan-table-filter="search"]');
+        filterSearch.addEventListener('keyup', function (e) {
+            datatable.search(e.target.value).draw();
+        });
+    }
+
+    var handleDeleteRows = () => {
+        // Select all delete buttons
+        const deleteButtons = table.querySelectorAll('[data-kt-permintaan-table-filter="delete_row"]');
+
+        deleteButtons.forEach(d => {
+            // Delete button on click
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Select parent row
+                const parent = e.target.closest('tr');
+                const kode = $(this).data('kode');
+
+                // Get permintaan name
+                const permintaanName = parent.querySelectorAll('td')[0].innerText;
+
+                // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+                Swal.fire({
+                    text: "Are you sure you want to delete " + permintaanName + "?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: "Yes, delete!",
+                    cancelButtonText: "No, cancel",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-danger",
+                        cancelButton: "btn fw-bold btn-active-light-primary"
+                    }
+                }).then(function (result) {
+                    if (result.value) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: `/permintaan/${kode}/destroy`,
+                            dataType: "JSON",
+                            success: function (response) {
+                                Swal.fire({
+                                    text: response.message,
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                }).then(function () {
+                                    datatable.row($(parent)).remove().draw();
+                                });
+                            }
+                        });
+                    } else if (result.dismiss === 'cancel') {
+                        Swal.fire({
+                            text: permintaanName + " was not deleted.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary",
+                            }
+                        });
+                    }
+                });
+            })
+        });
+    }
+
+    var handleEditRows = () => {
+        const editButtons = table.querySelectorAll('[data-kt-permintaan-table-filter="edit_row"]');
+
+        editButtons.forEach(d => {
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+                var kode = $(this).data('kode');
+                $.ajax({
+                    type: "GET",
+                    url: `/permintaan/${kode}/edit`,
+                    dataType: "JSON",
+                    success: function (response) {
+                        $(form.querySelector('[name="nama"]')).val(response.nama);
+                        $(submitButton).data('kode', kode);
+                        $('#kt_modal_add_permintaan').modal('show');
+                    }
+                });
+            })
+        });
+    }
+
+    return {
+        init: function () {
+            table = document.querySelector('#kt_permintaan_table');
+            form = document.querySelector('#kt_modal_add_permintaan_form');
+            submitButton = form.querySelector('#kt_modal_add_permintaan_submit');
+            if (!table) {
+                return;
+            }
+
+            initPermintaanList();
+            handleSearchDatatable();
+            handleDeleteRows();
+            handleEditRows();
+        }
+    }
+}();
+
+// On document ready
+KTUtil.onDOMContentLoaded(function () {
+    KTPermintaansList.init();
+});
