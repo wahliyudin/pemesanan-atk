@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Satuan;
+use App\Services\Barang\BarangService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class BarangController extends Controller
 {
+    public function __construct(
+        protected BarangService $barangService
+    ) {
+    }
+
     public function index()
     {
         $satuan = Satuan::query()->get(['kode', 'nama']);
@@ -18,7 +24,7 @@ class BarangController extends Controller
 
     public function list()
     {
-        $data = Barang::query()->get();
+        $data = $this->barangService->getAllWithSatuan();
         return DataTables::of($data)
             ->editColumn('harga', function (Barang $barang) {
                 return "Rp. " . number_format($barang->harga, 0, ',', '.');
@@ -36,7 +42,7 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         try {
-            Barang::query()->create([
+            $this->barangService->create([
                 'nama' => $request->nama,
                 'harga' => (int) str($request->harga)->replace('.', '')->value(),
                 'satuan_kode' => $request->satuan_kode,
@@ -63,10 +69,10 @@ class BarangController extends Controller
         }
     }
 
-    public function update(Request $request, Barang $barang)
+    public function update(Request $request, $id)
     {
         try {
-            $barang->update([
+            $this->barangService->update($id, [
                 'nama' => $request->nama,
                 'harga' => (int) str($request->harga)->replace('.', '')->value(),
                 'satuan_kode' => $request->satuan_kode,
@@ -79,10 +85,10 @@ class BarangController extends Controller
         }
     }
 
-    public function destroy(Barang $barang)
+    public function destroy($id)
     {
         try {
-            $barang->delete();
+            $this->barangService->delete($id);
             return response()->json([
                 'message' => 'Successfully'
             ]);
