@@ -124,7 +124,7 @@
                                     <!--begin::Form group-->
                                     <div class="form-group">
                                         <div data-repeater-list="kt_products" class="d-flex flex-column gap-3">
-                                            @foreach ($permintaan->barangs as $item)
+                                            @forelse ($permintaan->barangs as $item)
                                                 <div data-repeater-item
                                                     class="form-group d-flex flex-wrap align-items-center justify-content-between gap-5">
                                                     <!--begin::Select2-->
@@ -167,7 +167,49 @@
                                                         <!--end::Svg Icon-->
                                                     </button>
                                                 </div>
-                                            @endforeach
+                                            @empty
+                                                <div data-repeater-item
+                                                    class="form-group d-flex flex-wrap align-items-center justify-content-between gap-5">
+                                                    <!--begin::Select2-->
+                                                    <div class="w-250 w-md-250px">
+                                                        <select class="form-select" name="kode_barang"
+                                                            data-placeholder="Select a variation"
+                                                            data-kt-product="kode_barang">
+                                                            <option></option>
+                                                            @foreach ($barangs as $barang)
+                                                                <option value="{{ $barang->kode }}">
+                                                                    {{ $barang->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <!--end::Select2-->
+
+                                                    <!--begin::Input-->
+                                                    <input type="number" class="form-control mw-250 w-250px"
+                                                        name="volume" placeholder="Variation" />
+                                                    <!--end::Input-->
+
+                                                    <textarea name="keterangan" class="form-control w-300 w-md-300px" placeholder="Keterangan"></textarea>
+
+                                                    <button type="button" data-repeater-delete
+                                                        class="btn btn-sm btn-icon btn-light-danger">
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
+                                                        <span class="svg-icon svg-icon-1"><svg width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <rect opacity="0.5" x="7.05025" y="15.5356"
+                                                                    width="12" height="2" rx="1"
+                                                                    transform="rotate(-45 7.05025 15.5356)"
+                                                                    fill="currentColor" />
+                                                                <rect x="8.46447" y="7.05029" width="12"
+                                                                    height="2" rx="1"
+                                                                    transform="rotate(45 8.46447 7.05029)"
+                                                                    fill="currentColor" />
+                                                            </svg></span>
+                                                        <!--end::Svg Icon-->
+                                                    </button>
+                                                </div>
+                                            @endforelse
                                         </div>
                                     </div>
                                     <!--end::Form group-->

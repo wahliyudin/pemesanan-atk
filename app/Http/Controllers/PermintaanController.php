@@ -76,4 +76,17 @@ class PermintaanController extends Controller
             throw $th;
         }
     }
+
+    public function destroy(Permintaan $permintaan)
+    {
+        try {
+            $permintaan->barangs()->sync([]);
+            $permintaan->delete();
+            return response()->json([
+                'message' => 'Successfully'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }
