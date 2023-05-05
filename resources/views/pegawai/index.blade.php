@@ -144,7 +144,7 @@
                             <div class="modal-body py-10 px-lg-17">
                                 <div class="row mb-7">
                                     <!--begin::Input group-->
-                                    <div class="col-md-6 fv-row">
+                                    <div class="col-md-12 fv-row">
                                         <!--begin::Label-->
                                         <label class="required fs-6 fw-semibold mb-2">NIP</label>
                                         <!--end::Label-->
@@ -155,6 +155,8 @@
                                     </div>
                                     <!--end::Input group-->
 
+                                </div>
+                                <div class="row mb-7">
                                     <!--begin::Input group-->
                                     <div class="col-md-6 fv-row">
                                         <!--begin::Label-->
@@ -163,6 +165,23 @@
 
                                         <!--begin::Input-->
                                         <input type="text" class="form-control form-control-solid" name="nama" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-semibold mb-2">Bidang</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid" data-control="select2"
+                                            data-hide-search="true" name="kode_bidang">
+                                            <option selected disabled value="">- Pilih -</option>
+                                            @foreach ($bidangs as $bidang)
+                                                <option value="{{ $bidang->kode }}">{{ $bidang->nama }}</option>
+                                            @endforeach
+                                        </select>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -184,6 +203,7 @@
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
+
 
                                     <!--begin::Input group-->
                                     <div class="col-md-6 fv-row">

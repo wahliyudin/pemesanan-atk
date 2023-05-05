@@ -57,6 +57,13 @@ var KTModalpegawaiAdd = function () {
                             }
                         }
                     },
+                    'kode_bidang': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Harga Pegawai Wajib Diisi!'
+                            }
+                        }
+                    },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -94,6 +101,7 @@ var KTModalpegawaiAdd = function () {
                                 tempat_lahir: form.querySelector('[name="tempat_lahir"]').value,
                                 tanggal_lahir: form.querySelector('[name="tanggal_lahir"]').value,
                                 alamat: form.querySelector('[name="alamat"]').value,
+                                kode_bidang: form.querySelector('[name="kode_bidang"]').value,
                             },
                             dataType: "JSON",
                             success: function (response) {
@@ -210,6 +218,7 @@ var KTModalpegawaiAdd = function () {
             $(form.querySelector('[name="tanggal_lahir"]')).val('');
             $(form.querySelector('[name="no_hp"]')).val('');
             $(form.querySelector('[name="alamat"]')).val('');
+            $(form.querySelector('[name="kode_bidang"]')).val('');
         });
     }
 

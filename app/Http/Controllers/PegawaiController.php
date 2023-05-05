@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidang;
 use App\Models\Pegawai;
 use App\Services\Pegawai\PegawaiService;
 use Carbon\Carbon;
@@ -17,7 +18,8 @@ class PegawaiController extends Controller
 
     public function index()
     {
-        return view('pegawai.index');
+        $bidangs = Bidang::query()->get(['kode', 'nama']);
+        return view('pegawai.index', compact('bidangs'));
     }
 
     public function list()
@@ -48,6 +50,7 @@ class PegawaiController extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'no_hp' => $request->no_hp,
                 'alamat' => $request->alamat,
+                'kode_bidang' => $request->kode_bidang,
             ]);
             return response()->json([
                 'message' => 'Successfully'
@@ -69,6 +72,7 @@ class PegawaiController extends Controller
                 'tanggal_lahir' => $pegawai->tanggal_lahir,
                 'no_hp' => $pegawai->no_hp,
                 'alamat' => $pegawai->alamat,
+                'kode_bidang' => $pegawai->kode_bidang,
             ]);
         } catch (\Throwable $th) {
             throw $th;
@@ -86,6 +90,7 @@ class PegawaiController extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'no_hp' => $request->no_hp,
                 'alamat' => $request->alamat,
+                'kode_bidang' => $request->kode_bidang,
             ]);
             return response()->json([
                 'message' => 'Successfully Updated'

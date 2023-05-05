@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->string('no_hp');
             $table->text('alamat');
+            $table->string('kode_bidang');
             $table->timestamps();
         });
     }

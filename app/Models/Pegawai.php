@@ -24,6 +24,7 @@ class Pegawai extends Model
         'tanggal_lahir',
         'no_hp',
         'alamat',
+        'kode_bidang',
     ];
 
     protected function kode(): Attribute
