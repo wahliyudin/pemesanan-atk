@@ -42,6 +42,14 @@ var KTPermintaansList = function () {
                     data: 'kode',
                 },
                 {
+                    name: 'tanggal',
+                    data: 'tanggal',
+                },
+                {
+                    name: 'pemohon',
+                    data: 'pemohon',
+                },
+                {
                     name: 'action',
                     data: 'action',
                     orderable: false,
@@ -152,7 +160,7 @@ var KTPermintaansList = function () {
         init: function () {
             table = document.querySelector('#kt_permintaan_table');
             form = document.querySelector('#kt_modal_add_permintaan_form');
-            submitButton = form.querySelector('#kt_modal_add_permintaan_submit');
+            // submitButton = form.querySelector('#kt_modal_add_permintaan_submit');
             if (!table) {
                 return;
             }
@@ -160,7 +168,7 @@ var KTPermintaansList = function () {
             initPermintaanList();
             handleSearchDatatable();
             handleDeleteRows();
-            handleEditRows();
+            // handleEditRows();
         }
     }
 }();

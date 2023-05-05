@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Services\Pegawai\PegawaiService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class PegawaiController extends Controller
 {
+    public function __construct(
+        protected PegawaiService $pegawaiService
+    ) {
+    }
+
     public function index()
     {
         return view('pegawai.index');
@@ -16,7 +22,7 @@ class PegawaiController extends Controller
 
     public function list()
     {
-        $data = Pegawai::query()->get();
+        $data = $this->pegawaiService->all();
         return DataTables::of($data)
             ->editColumn('jenis_kelamin', function (Pegawai $pegawai) {
                 return $pegawai->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki - Laki';
@@ -34,7 +40,7 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         try {
-            Pegawai::query()->create([
+            $this->pegawaiService->create([
                 'nip' => $request->nip,
                 'nama' => $request->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
@@ -69,10 +75,10 @@ class PegawaiController extends Controller
         }
     }
 
-    public function update(Request $request, Pegawai $pegawai)
+    public function update(Request $request, $id)
     {
         try {
-            $pegawai->update([
+            $this->pegawaiService->update($id, [
                 'nip' => $request->nip,
                 'nama' => $request->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
@@ -89,10 +95,10 @@ class PegawaiController extends Controller
         }
     }
 
-    public function destroy(Pegawai $pegawai)
+    public function destroy($id)
     {
         try {
-            $pegawai->delete();
+            $this->pegawaiService->delete($id);
             return response()->json([
                 'message' => 'Successfully'
             ]);

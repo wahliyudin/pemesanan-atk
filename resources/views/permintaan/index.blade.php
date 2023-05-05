@@ -61,10 +61,9 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-permintaan-table-toolbar="base">
                             <!--begin::Add permintaan-->
-                            <button type="button" class="btn btn-primary add_permintaan" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_add_permintaan">
+                            <a href="{{ route('permintaan.create') }}" type="button" class="btn btn-primary ">
                                 Add Permintaan
-                            </button>
+                            </a>
                             <!--end::Add permintaan-->
                         </div>
                         <!--end::Toolbar-->
@@ -83,6 +82,8 @@
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-125px">Kode</th>
+                                <th class="min-w-125px">Tanggal</th>
+                                <th class="min-w-125px">Pemohon</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -99,91 +100,6 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-
-            <!--begin::Modals-->
-            <!--begin::Modal - Permintaans - Add-->
-            <div class="modal fade" id="kt_modal_add_permintaan" tabindex="-1" aria-hidden="true">
-                <!--begin::Modal dialog-->
-                <div class="modal-dialog modal-dialog-centered mw-650px">
-                    <!--begin::Modal content-->
-                    <div class="modal-content">
-                        <!--begin::Form-->
-                        <form class="form" action="#" id="kt_modal_add_permintaan_form"
-                            data-kt-redirect="{{ route('permintaan') }}">
-                            <!--begin::Modal header-->
-                            <div class="modal-header" id="kt_modal_add_permintaan_header">
-                                <!--begin::Modal title-->
-                                <h2 class="fw-bold">Add a Permintaan</h2>
-                                <!--end::Modal title-->
-
-                                <!--begin::Close-->
-                                <div id="kt_modal_add_permintaan_close" class="btn btn-icon btn-sm btn-active-icon-primary">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                    <span class="svg-icon svg-icon-1"><svg width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                                rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                            <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                                transform="rotate(45 7.41422 6)" fill="currentColor" />
-                                        </svg>
-
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </div>
-                                <!--end::Close-->
-                            </div>
-                            <!--end::Modal header-->
-
-                            <!--begin::Modal body-->
-                            <div class="modal-body py-10 px-lg-17">
-                                <!--begin::Scroll-->
-                                <div class="scroll-y me-n7 pe-7" id="kt_modal_add_permintaan_scroll" data-kt-scroll="true"
-                                    data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-                                    data-kt-scroll-dependencies="#kt_modal_add_permintaan_header"
-                                    data-kt-scroll-wrappers="#kt_modal_add_permintaan_scroll" data-kt-scroll-offset="300px">
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Nama</label>
-                                        <!--end::Label-->
-
-                                        <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" name="nama" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-
-                                </div>
-                                <!--end::Scroll-->
-                            </div>
-                            <!--end::Modal body-->
-
-                            <!--begin::Modal footer-->
-                            <div class="modal-footer flex-center">
-                                <!--begin::Button-->
-                                <button type="reset" id="kt_modal_add_permintaan_cancel" class="btn btn-light me-3">
-                                    Discard
-                                </button>
-                                <!--end::Button-->
-
-                                <!--begin::Button-->
-                                <button type="submit" id="kt_modal_add_permintaan_submit" class="btn btn-primary">
-                                    <span class="indicator-label">
-                                        Submit
-                                    </span>
-                                    <span class="indicator-progress">
-                                        Please wait... <span
-                                            class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                    </span>
-                                </button>
-                                <!--end::Button-->
-                            </div>
-                            <!--end::Modal footer-->
-                        </form>
-                        <!--end::Form-->
-                    </div>
-                </div>
-            </div>
         </div>
         <!--end::Container-->
     </div>
@@ -191,6 +107,6 @@
 
 @push('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/apps/permintaan/listing.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/apps/permintaan/add.js') }}"></script>
 @endpush
