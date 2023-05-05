@@ -19,6 +19,8 @@ class Permintaan extends Model
 
     protected $keyType = 'string';
 
+    protected $with = ['barangs'];
+
     protected $fillable = [
         'kode',
         'kode_pegawai',
@@ -43,7 +45,7 @@ class Permintaan extends Model
 
     public function barangs()
     {
-        return $this->belongsToMany(Barang::class, 'permintaan_barang', 'kode_barang', 'kode_permintaan', 'kode', 'kode')->withTimestamps();
+        return $this->belongsToMany(Barang::class, 'permintaan_barang', 'kode_permintaan', 'kode_barang', 'kode', 'kode')->withPivot(['volume', 'keterangan'])->withTimestamps();
     }
 
     public function pemohon()

@@ -71,4 +71,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/permintaan/create', [PermintaanController::class, 'create'])->name('permintaan.create');
     Route::post('/permintaan/store', [PermintaanController::class, 'store'])->name('permintaan.store');
     Route::get('/permintaan/{permintaan:kode}/edit', [PermintaanController::class, 'edit'])->name('permintaan.edit');
+    Route::put('/permintaan/{permintaan:kode}/update', [PermintaanController::class, 'update'])->name('permintaan.update');
 });

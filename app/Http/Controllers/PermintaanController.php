@@ -48,11 +48,7 @@ class PermintaanController extends Controller
                 'tanggal' => $request->tanggal,
                 'kode_pemohon' => $request->kode_pemohon,
             ]);
-            $collect = collect($request->kt_products)->map(function ($product) use ($permintaan) {
-                $product['kode_permintaan'] = $permintaan->getKey();
-                return $product;
-            });
-            $permintaan->barangs()->attach($collect->toArray());
+            $permintaan->barangs()->attach($request->kt_products);
             return to_route('permintaan');
         } catch (\Throwable $th) {
             throw $th;
@@ -64,5 +60,20 @@ class PermintaanController extends Controller
         $barangs = Barang::query()->get(['kode', 'nama']);
         $pegawais = Pegawai::query()->get(['kode', 'nama']);
         return view('permintaan.edit', compact('pegawais', 'barangs', 'permintaan'));
+    }
+
+    public function update(Permintaan $permintaan, Request $request)
+    {
+        try {
+            $permintaan->update([
+                'kode_pegawai' => $request->kode_pegawai,
+                'tanggal' => $request->tanggal,
+                'kode_pemohon' => $request->kode_pemohon,
+            ]);
+            $permintaan->barangs()->sync($request->kt_products);
+            return to_route('permintaan');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
