@@ -14,6 +14,8 @@ class Pembelian extends Model
 
     protected $primaryKey = 'kode';
 
+    protected $keyType = 'string';
+
     protected $fillable = [
         'kode',
         'kode_pegawai',

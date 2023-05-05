@@ -15,6 +15,8 @@ class Stok extends Model
 
     protected $primaryKey = 'kode';
 
+    protected $keyType = 'string';
+
     protected $fillable = [
         'kode',
         'barang_kode',
