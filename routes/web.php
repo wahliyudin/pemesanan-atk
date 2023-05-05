@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BidangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasokController;
@@ -85,4 +86,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pemesanan/{pemesanan:kode}/edit', [PemesananController::class, 'edit'])->name('pemesanan.edit');
     Route::put('/pemesanan/{pemesanan:kode}/update', [PemesananController::class, 'update'])->name('pemesanan.update');
     Route::delete('/pemesanan/{pemesanan:kode}/destroy', [PemesananController::class, 'destroy'])->name('pemesanan.destroy');
+
+    Route::get('/bidang', [BidangController::class, 'index'])->name('bidang');
+    Route::post('/bidang/list', [BidangController::class, 'list'])->name('bidang.list');
+    Route::post('/bidang/store', [BidangController::class, 'store'])->name('bidang.store');
+    Route::get('/bidang/{bidang}/edit', [BidangController::class, 'edit'])->name('bidang.edit');
+    Route::put('/bidang/{bidang}/update', [BidangController::class, 'update'])->name('bidang.update');
+    Route::delete('/bidang/{bidang}/destroy', [BidangController::class, 'destroy'])->name('bidang.destroy');
 });
