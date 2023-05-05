@@ -51,7 +51,7 @@ class PermintaanController extends Controller
             $permintaan->barangs()->attach($request->kt_products);
             return to_route('permintaan');
         } catch (\Throwable $th) {
-            throw $th;
+            return back()->with('error', 'Something went wrong');
         }
     }
 
@@ -73,7 +73,7 @@ class PermintaanController extends Controller
             $permintaan->barangs()->sync($request->kt_products);
             return to_route('permintaan');
         } catch (\Throwable $th) {
-            throw $th;
+            return back()->with('error', 'Something went wrong');
         }
     }
 

@@ -11,13 +11,13 @@
             <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-2">
                 <!--begin::Title-->
                 <h1 class="text-dark fw-bold my-1 fs-2">
-                    Data Permintaan </h1>
+                    Data Pemesanan </h1>
                 <!--end::Title-->
 
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb fw-semibold fs-base my-1">
                     <li class="breadcrumb-item text-muted">
-                        Data Permintaan
+                        Data Pemesanan
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -49,8 +49,8 @@
                                         fill="currentColor" />
                                 </svg>
                             </span>
-                            <!--end::Svg Icon--> <input type="text" data-kt-permintaan-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-15" placeholder="Search Permintaans" />
+                            <!--end::Svg Icon--> <input type="text" data-kt-pemesanan-table-filter="search"
+                                class="form-control form-control-solid w-250px ps-15" placeholder="Search Pemesanans" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -59,12 +59,12 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end" data-kt-permintaan-table-toolbar="base">
-                            <!--begin::Add permintaan-->
-                            <a href="{{ route('permintaan.create') }}" type="button" class="btn btn-primary ">
-                                Add Permintaan
+                        <div class="d-flex justify-content-end" data-kt-pemesanan-table-toolbar="base">
+                            <!--begin::Add pemesanan-->
+                            <a href="{{ route('pemesanan.create') }}" type="button" class="btn btn-primary ">
+                                Add Pemesanan
                             </a>
-                            <!--end::Add permintaan-->
+                            <!--end::Add pemesanan-->
                         </div>
                         <!--end::Toolbar-->
                     </div>
@@ -76,14 +76,13 @@
                 <div class="card-body pt-0">
 
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_permintaan_table">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_pemesanan_table">
                         <!--begin::Table head-->
                         <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-125px">Kode</th>
                                 <th class="min-w-125px">Tanggal</th>
-                                <th class="min-w-125px">Pemohon</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -107,5 +106,5 @@
 
 @push('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/apps/permintaan/listing.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/pemesanan/listing.js') }}"></script>
 @endpush

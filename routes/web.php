@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasokController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PermintaanController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\StokController;
@@ -76,4 +77,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/permintaan/{permintaan:kode}/edit', [PermintaanController::class, 'edit'])->name('permintaan.edit');
     Route::put('/permintaan/{permintaan:kode}/update', [PermintaanController::class, 'update'])->name('permintaan.update');
     Route::delete('/permintaan/{permintaan:kode}/destroy', [PermintaanController::class, 'destroy'])->name('permintaan.destroy');
+
+    Route::get('/pemesanan', [PemesananController::class, 'index'])->name('pemesanan');
+    Route::post('/pemesanan/list', [PemesananController::class, 'list'])->name('pemesanan.list');
+    Route::get('/pemesanan/create', [PemesananController::class, 'create'])->name('pemesanan.create');
+    Route::post('/pemesanan/store', [PemesananController::class, 'store'])->name('pemesanan.store');
+    Route::get('/pemesanan/{pemesanan:kode}/edit', [PemesananController::class, 'edit'])->name('pemesanan.edit');
+    Route::put('/pemesanan/{pemesanan:kode}/update', [PemesananController::class, 'update'])->name('pemesanan.update');
+    Route::delete('/pemesanan/{pemesanan:kode}/destroy', [PemesananController::class, 'destroy'])->name('pemesanan.destroy');
 });
