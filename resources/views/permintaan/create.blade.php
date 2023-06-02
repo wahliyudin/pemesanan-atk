@@ -113,7 +113,7 @@
                         <div class="col-md-12">
                             <div class="" data-kt-product="auto-options">
                                 <!--begin::Label-->
-                                <label class="form-label">Add Product Variations</label>
+                                <label class="form-label">Tambah Barang</label>
                                 <!--end::Label-->
 
                                 <!--begin::Repeater-->
@@ -126,7 +126,7 @@
                                                 <!--begin::Select2-->
                                                 <div class="w-250 w-md-250px">
                                                     <select class="form-select" name="kode_barang"
-                                                        data-placeholder="Select a variation" data-kt-product="kode_barang">
+                                                        data-placeholder="Pilih Barang" data-kt-product="kode_barang">
                                                         <option></option>
                                                         @foreach ($barangs as $barang)
                                                             <option value="{{ $barang->kode }}">
@@ -138,7 +138,7 @@
 
                                                 <!--begin::Input-->
                                                 <input type="number" class="form-control mw-250 w-250px" name="volume"
-                                                    placeholder="Variation" />
+                                                    placeholder="Volume" />
                                                 <!--end::Input-->
 
                                                 <textarea name="keterangan" class="form-control w-300 w-md-300px" placeholder="Keterangan"></textarea>
