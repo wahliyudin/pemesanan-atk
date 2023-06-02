@@ -32,13 +32,26 @@
         <div class=" container-xxl ">
             <!--begin::Card-->
             <div class="card">
-                <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
                 </div>
-                <!--end::Card header-->
 
-                <!--begin::Card body-->
                 <div class="card-body pt-0">
+                    @if (Session::has('error'))
+                        <div class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row p-5 mb-10">
+                            <span class="svg-icon svg-icon-2hx svg-icon-light me-4 mb-5 mb-sm-0">...</span>
+
+                            <div class="d-flex flex-column text-light pe-0 pe-sm-10">
+
+                                <span>{{ Session::get('error') }}</span>
+                            </div>
+
+                            <button type="button"
+                                class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto"
+                                data-bs-dismiss="alert">
+                                <span class="svg-icon svg-icon-2x svg-icon-light">...</span>
+                            </button>
+                        </div>
+                    @endif
                     <form action="{{ route('permintaan.store') }}" method="POST" class="row">
                         @csrf
                         <div class="col-md-4">
@@ -71,43 +84,10 @@
                                     <!--end::Icon-->
 
                                     <!--begin::Datepicker-->
-                                    <input class="form-control form-control-solid ps-12" placeholder="Select a date"
-                                        name="tanggal" />
+                                    <input class="form-control form-control-solid ps-12"
+                                        value="{{ now()->format('Y-m-d') }}" placeholder="Select a date" name="tanggal" />
                                     <!--end::Datepicker-->
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <!--end::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fs-6 fw-semibold mb-2">Pemohon</label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" data-control="select2" name="kode_pemohon">
-                                    <option disabled selected value="">- Pilih -</option>
-                                    @foreach ($pegawais as $item)
-                                        <option value="{{ $item->kode }}">{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
-                                <!--end::Input-->
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fs-6 fw-semibold mb-2">Pegawai</label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" data-control="select2" name="kode_pegawai">
-                                    <option disabled selected value="">- Pilih -</option>
-                                    @foreach ($pegawais as $item)
-                                        <option value="{{ $item->kode }}">{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
-                                <!--end::Input-->
                             </div>
                         </div>
                         <div class="col-md-12">

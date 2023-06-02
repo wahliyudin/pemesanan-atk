@@ -78,41 +78,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <!--end::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fs-6 fw-semibold mb-2">Pemohon</label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" data-control="select2" name="kode_pemohon">
-                                    <option disabled selected value="">- Pilih -</option>
-                                    @foreach ($pegawais as $item)
-                                        <option @selected($permintaan->kode_pemohon == $item->kode) value="{{ $item->kode }}">{{ $item->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <!--end::Input-->
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fs-6 fw-semibold mb-2">Pegawai</label>
-                                <!--end::Label-->
-
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid" data-control="select2" name="kode_pegawai">
-                                    <option disabled selected value="">- Pilih -</option>
-                                    @foreach ($pegawais as $item)
-                                        <option @selected($permintaan->kode_pegawai == $item->kode) value="{{ $item->kode }}">{{ $item->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <!--end::Input-->
-                            </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="" data-kt-product="auto-options">
                                 <!--begin::Label-->
@@ -152,8 +117,8 @@
                                                     <button type="button" data-repeater-delete
                                                         class="btn btn-sm btn-icon btn-light-danger">
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
-                                                        <span class="svg-icon svg-icon-1"><svg width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                        <span class="svg-icon svg-icon-1"><svg width="24" height="24"
+                                                                viewBox="0 0 24 24" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                 <rect opacity="0.5" x="7.05025" y="15.5356"
                                                                     width="12" height="2" rx="1"
