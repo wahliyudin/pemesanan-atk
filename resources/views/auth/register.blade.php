@@ -32,6 +32,21 @@
 
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
+                    <label class="form-label fw-bold text-dark fs-6">NIP</label>
+                    <input id="nip" type="number"
+                        class="form-control form-control-lg form-control-solid @error('nip') is-invalid @enderror"
+                        name="nip" value="{{ old('nip') }}" required autocomplete="nip" autofocus>
+
+                    @error('nip')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="fv-row mb-7">
                     <label class="form-label fw-bold text-dark fs-6">Name</label>
                     <input id="name" type="text"
                         class="form-control form-control-lg form-control-solid @error('name') is-invalid @enderror"

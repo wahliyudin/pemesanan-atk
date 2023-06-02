@@ -181,7 +181,7 @@
                         </a>
                     </div>
                 @endrole
-                @role('kepala_dinas')
+                @role('kepala_dinas|bendahara')
                     <div class="menu-item">
                         <a class="menu-link {{ request()->routeIs('permintaan') ? 'active' : '' }}"
                             href="{{ route('permintaan') }}">
