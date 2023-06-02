@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Pemesanan\Status;
+use App\Enums\Role;
 use App\Models\Barang;
 use App\Models\Pemesanan;
+use App\Traits\Helper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class PemesananController extends Controller
 {
+    use Helper;
+
     public function index()
     {
         return view('pemesanan.index');
@@ -25,10 +30,13 @@ class PemesananController extends Controller
             ->editColumn('tanggal', function (Pemesanan $pemesanan) {
                 return Carbon::make($pemesanan?->tanggal)->translatedFormat('d F Y');
             })
+            ->editColumn('status', function (Pemesanan $pemesanan) {
+                return $pemesanan->status?->badge();
+            })
             ->editColumn('action', function (Pemesanan $pemesanan) {
                 return view('pemesanan.action', compact('pemesanan'))->render();
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'status'])
             ->make(true);
     }
 
@@ -77,6 +85,34 @@ class PemesananController extends Controller
             $pemesanan->delete();
             return response()->json([
                 'message' => 'Successfully'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function setujui(Pemesanan $pemesanan)
+    {
+        try {
+            $pemesanan->update([
+                'status' => Status::SETUJUI
+            ]);
+            return response()->json([
+                'message' => 'Berhasil disetujui'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function tolak(Pemesanan $pemesanan)
+    {
+        try {
+            $pemesanan->update([
+                'status' => Status::TOLAK
+            ]);
+            return response()->json([
+                'message' => 'Berhasil ditolak'
             ]);
         } catch (\Throwable $th) {
             throw $th;

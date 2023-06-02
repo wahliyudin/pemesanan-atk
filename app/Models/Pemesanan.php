@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Pemesanan\Status;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +26,10 @@ class Pemesanan extends Model
         'kode',
         'tanggal',
         'status'
+    ];
+
+    protected $casts = [
+        'status' => Status::class
     ];
 
     protected function kode(): Attribute

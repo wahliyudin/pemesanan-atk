@@ -71,8 +71,8 @@
                                     <!--end::Icon-->
 
                                     <!--begin::Datepicker-->
-                                    <input class="form-control form-control-solid ps-12" placeholder="Select a date"
-                                        name="tanggal" />
+                                    <input class="form-control form-control-solid ps-12"
+                                        value="{{ now()->format('Y-m-d') }}" placeholder="Select a date" name="tanggal" />
                                     <!--end::Datepicker-->
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                         <div class="col-md-12">
                             <div class="" data-kt-product="auto-options">
                                 <!--begin::Label-->
-                                <label class="form-label">Add Product Variations</label>
+                                <label class="form-label">Detail Pesanan</label>
                                 <!--end::Label-->
 
                                 <!--begin::Repeater-->
@@ -93,7 +93,7 @@
                                                 <!--begin::Select2-->
                                                 <div class="w-250 w-md-250px">
                                                     <select class="form-select" name="kode_barang"
-                                                        data-placeholder="Select a variation" data-kt-product="kode_barang">
+                                                        data-placeholder="Pilih Barang" data-kt-product="kode_barang">
                                                         <option></option>
                                                         @foreach ($barangs as $barang)
                                                             <option value="{{ $barang->kode }}">
@@ -105,7 +105,7 @@
 
                                                 <!--begin::Input-->
                                                 <input type="number" class="form-control mw-250 w-250px" name="volume"
-                                                    placeholder="Variation" />
+                                                    placeholder="Volume" />
                                                 <!--end::Input-->
 
 
@@ -144,7 +144,7 @@
                                                     <rect x="6" y="11" width="12" height="2"
                                                         rx="1" fill="currentColor" />
                                                 </svg></span>
-                                            <!--end::Svg Icon--> Add another variation
+                                            <!--end::Svg Icon--> Tambah Pesanan
                                         </button>
                                     </div>
                                     <!--end::Form group-->

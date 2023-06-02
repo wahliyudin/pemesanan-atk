@@ -180,8 +180,6 @@
                             <span class="menu-title">Stok</span>
                         </a>
                     </div>
-                @endrole
-                @role('kepala_dinas|bendahara')
                     <div class="menu-item">
                         <a class="menu-link {{ request()->routeIs('permintaan') ? 'active' : '' }}"
                             href="{{ route('permintaan') }}">
@@ -201,7 +199,7 @@
                         </a>
                     </div>
                 @endrole
-                @role('bendahara')
+                @role('bendahara|kepala_dinas')
                     <div class="menu-item">
                         <a class="menu-link {{ request()->routeIs('pemesanan') ? 'active' : '' }}"
                             href="{{ route('pemesanan') }}">
@@ -222,7 +220,8 @@
                             <span class="menu-title">Pemesanan</span>
                         </a>
                     </div>
-
+                @endrole
+                @role('bendahara')
                     <div class="menu-item">
                         <a class="menu-link {{ request()->routeIs('pengguna') ? 'active' : '' }}"
                             href="{{ route('pengguna') }}">

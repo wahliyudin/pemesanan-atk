@@ -46,6 +46,10 @@ var KTPermintaansList = function () {
                     data: 'tanggal',
                 },
                 {
+                    name: 'status',
+                    data: 'status',
+                },
+                {
                     name: 'action',
                     data: 'action',
                     orderable: false,
@@ -131,6 +135,118 @@ var KTPermintaansList = function () {
         });
     }
 
+    var handleSetujui = () => {
+        // Select all delete buttons
+        $(table).on('click', '[data-kt-pemesanan-table-filter="setuju_row"]', function (e) {
+            const parent = e.target.closest('tr');
+            const kode = $(this).data('kode');
+
+            // Get pemesanan name
+            const pemesananName = parent.querySelectorAll('td')[0].innerText;
+
+            // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+            Swal.fire({
+                text: "Apakah anda yakin " + pemesananName + " disetujui?",
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: "Ya, setujui!",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-success",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: `/pemesanan/${kode}/setujui`,
+                        dataType: "JSON",
+                        success: function (response) {
+                            Swal.fire({
+                                text: response.message,
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            }).then(function () {
+                                datatable.ajax.reload();
+                            });
+                        }
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: pemesananName + " batal disetujui.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    var handleTolak = () => {
+        $(table).on('click', '[data-kt-pemesanan-table-filter="tolak_row"]', function (e) {
+            // Select parent row
+            const parent = e.target.closest('tr');
+            const kode = $(this).data('kode');
+
+            // Get pemesanan name
+            const pemesananName = parent.querySelectorAll('td')[0].innerText;
+
+            // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+            Swal.fire({
+                text: "Apakah anda yakin " + pemesananName + " ditolak?",
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: "Ya, tolak!",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: `/pemesanan/${kode}/tolak`,
+                        dataType: "JSON",
+                        success: function (response) {
+                            Swal.fire({
+                                text: response.message,
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            }).then(function () {
+                                datatable.ajax.reload();
+                            });
+                        }
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: pemesananName + " batal ditolak.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
+            });
+        });
+    }
+
     var handleEditRows = () => {
         const editButtons = table.querySelectorAll('[data-kt-pemesanan-table-filter="edit_row"]');
 
@@ -163,6 +279,8 @@ var KTPermintaansList = function () {
             initPermintaanList();
             handleSearchDatatable();
             handleDeleteRows();
+            handleSetujui();
+            handleTolak();
         }
     }
 }();

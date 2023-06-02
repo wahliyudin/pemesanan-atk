@@ -18,6 +18,9 @@ class PenggunaController extends Controller
     {
         $data = User::query()->get();
         return DataTables::of($data)
+            ->editColumn('role', function (User $user) {
+                return $user->role?->label();
+            })
             ->editColumn('action', function (User $user) {
                 return view('pengguna.action', compact('user'))->render();
             })

@@ -83,6 +83,7 @@
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-125px">Kode</th>
                                 <th class="min-w-125px">Tanggal</th>
+                                <th class="min-w-125px">Status</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->

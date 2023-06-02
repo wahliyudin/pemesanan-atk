@@ -16,4 +16,9 @@ trait Helper
             ->first()
             ?->pegawai;
     }
+
+    public function hasRole(Role $role)
+    {
+        return auth()->user()?->role == $role;
+    }
 }

@@ -73,13 +73,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/stok/{stok}/update', [StokController::class, 'update'])->name('stok.update');
         Route::delete('/stok/{stok}/destroy', [StokController::class, 'destroy'])->name('stok.destroy');
 
-        Route::get('/pemesanan', [PemesananController::class, 'index'])->name('pemesanan');
-        Route::post('/pemesanan/list', [PemesananController::class, 'list'])->name('pemesanan.list');
-        Route::get('/pemesanan/create', [PemesananController::class, 'create'])->name('pemesanan.create');
-        Route::post('/pemesanan/store', [PemesananController::class, 'store'])->name('pemesanan.store');
-        Route::get('/pemesanan/{pemesanan:kode}/edit', [PemesananController::class, 'edit'])->name('pemesanan.edit');
-        Route::put('/pemesanan/{pemesanan:kode}/update', [PemesananController::class, 'update'])->name('pemesanan.update');
-        Route::delete('/pemesanan/{pemesanan:kode}/destroy', [PemesananController::class, 'destroy'])->name('pemesanan.destroy');
+
 
         Route::get('/bidang', [BidangController::class, 'index'])->name('bidang');
         Route::post('/bidang/list', [BidangController::class, 'list'])->name('bidang.list');
@@ -95,6 +89,16 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/pengguna/{user}/update', [PenggunaController::class, 'update'])->name('pengguna.update');
         Route::delete('/pengguna/{user}/destroy', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
     });
+
+    Route::get('/pemesanan', [PemesananController::class, 'index'])->name('pemesanan');
+    Route::post('/pemesanan/list', [PemesananController::class, 'list'])->name('pemesanan.list');
+    Route::get('/pemesanan/create', [PemesananController::class, 'create'])->name('pemesanan.create');
+    Route::post('/pemesanan/store', [PemesananController::class, 'store'])->name('pemesanan.store');
+    Route::get('/pemesanan/{pemesanan:kode}/edit', [PemesananController::class, 'edit'])->name('pemesanan.edit');
+    Route::put('/pemesanan/{pemesanan:kode}/update', [PemesananController::class, 'update'])->name('pemesanan.update');
+    Route::delete('/pemesanan/{pemesanan:kode}/destroy', [PemesananController::class, 'destroy'])->name('pemesanan.destroy');
+    Route::post('/pemesanan/{pemesanan:kode}/setujui', [PemesananController::class, 'setujui'])->name('pemesanan.setujui');
+    Route::post('/pemesanan/{pemesanan:kode}/tolak', [PemesananController::class, 'tolak'])->name('pemesanan.tolak');
 
     Route::get('/permintaan', [PermintaanController::class, 'index'])->name('permintaan');
     Route::post('/permintaan/list', [PermintaanController::class, 'list'])->name('permintaan.list');
