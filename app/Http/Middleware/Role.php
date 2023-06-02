@@ -21,7 +21,7 @@ class Role
         $user = auth()->user();
 
         foreach ($roles as $role) {
-            if ($user->role == $role) {
+            if ($user->role?->value == $role) {
                 return $next($request);
             }
         }

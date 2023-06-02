@@ -183,9 +183,9 @@
                                         <select class="form-select form-select-solid" data-control="select2"
                                             data-dropdown-parent="#kt_modal_add_pengguna" name="role">
                                             <option disabled selected value="">- Pilih -</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="bendahara">Bendahara</option>
-                                            <option value="kepala_bidang">Kepala Bidang</option>
+                                            @foreach (\App\Enums\Role::cases() as $role)
+                                                <option value="{{ $role->value }}">{{ $role->label() }}</option>
+                                            @endforeach
                                         </select>
                                         <!--end::Input-->
                                     </div>

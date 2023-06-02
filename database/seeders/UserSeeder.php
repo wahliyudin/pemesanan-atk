@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,7 +18,8 @@ class UserSeeder extends Seeder
         User::query()->create([
             'name' => 'Wahliyudin',
             'email' => 'wahliyudin@gmail.com',
-            'password' => Hash::make(123456789),
+            'password' => Hash::make(1234567890),
+            'role' => Role::BENDAHARA,
         ]);
     }
 }
