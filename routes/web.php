@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PermintaanController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\StokController;
@@ -93,4 +94,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bidang/{bidang}/edit', [BidangController::class, 'edit'])->name('bidang.edit');
     Route::put('/bidang/{bidang}/update', [BidangController::class, 'update'])->name('bidang.update');
     Route::delete('/bidang/{bidang}/destroy', [BidangController::class, 'destroy'])->name('bidang.destroy');
+
+    Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
+    Route::post('/pengguna/list', [PenggunaController::class, 'list'])->name('pengguna.list');
+    Route::post('/pengguna/store', [PenggunaController::class, 'store'])->name('pengguna.store');
+    Route::get('/pengguna/{user}/edit', [PenggunaController::class, 'edit'])->name('pengguna.edit');
+    Route::put('/pengguna/{user}/update', [PenggunaController::class, 'update'])->name('pengguna.update');
+    Route::delete('/pengguna/{user}/destroy', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
 });
