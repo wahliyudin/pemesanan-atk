@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\PemesananController;
@@ -109,4 +110,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/permintaan/{permintaan:kode}/update', [PermintaanController::class, 'update'])->name('permintaan.update');
     Route::get('/permintaan/{permintaan:kode}/show', [PermintaanController::class, 'show'])->name('permintaan.show');
     Route::delete('/permintaan/{permintaan:kode}/destroy', [PermintaanController::class, 'destroy'])->name('permintaan.destroy');
+
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+    Route::post('/laporan/pemesanan', [LaporanController::class, 'pemesanan'])->name('laporan.pemesanan');
+    Route::post('/laporan/permintaan', [LaporanController::class, 'permintaan'])->name('laporan.permintaan');
 });
