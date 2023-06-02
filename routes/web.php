@@ -96,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pemesanan/store', [PemesananController::class, 'store'])->name('pemesanan.store');
     Route::get('/pemesanan/{pemesanan:kode}/edit', [PemesananController::class, 'edit'])->name('pemesanan.edit');
     Route::put('/pemesanan/{pemesanan:kode}/update', [PemesananController::class, 'update'])->name('pemesanan.update');
+    Route::get('/pemesanan/{pemesanan:kode}/show', [PemesananController::class, 'show'])->name('pemesanan.show');
     Route::delete('/pemesanan/{pemesanan:kode}/destroy', [PemesananController::class, 'destroy'])->name('pemesanan.destroy');
     Route::post('/pemesanan/{pemesanan:kode}/setujui', [PemesananController::class, 'setujui'])->name('pemesanan.setujui');
     Route::post('/pemesanan/{pemesanan:kode}/tolak', [PemesananController::class, 'tolak'])->name('pemesanan.tolak');
@@ -106,5 +107,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/permintaan/store', [PermintaanController::class, 'store'])->name('permintaan.store');
     Route::get('/permintaan/{permintaan:kode}/edit', [PermintaanController::class, 'edit'])->name('permintaan.edit');
     Route::put('/permintaan/{permintaan:kode}/update', [PermintaanController::class, 'update'])->name('permintaan.update');
+    Route::get('/permintaan/{permintaan:kode}/show', [PermintaanController::class, 'show'])->name('permintaan.show');
     Route::delete('/permintaan/{permintaan:kode}/destroy', [PermintaanController::class, 'destroy'])->name('permintaan.destroy');
 });

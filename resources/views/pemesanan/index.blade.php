@@ -61,9 +61,11 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-pemesanan-table-toolbar="base">
                             <!--begin::Add pemesanan-->
-                            <a href="{{ route('pemesanan.create') }}" type="button" class="btn btn-primary ">
-                                Add Pemesanan
-                            </a>
+                            @role('bendahara')
+                                <a href="{{ route('pemesanan.create') }}" type="button" class="btn btn-primary ">
+                                    Add Pemesanan
+                                </a>
+                            @endrole
                             <!--end::Add pemesanan-->
                         </div>
                         <!--end::Toolbar-->

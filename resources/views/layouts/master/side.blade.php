@@ -180,6 +180,8 @@
                             <span class="menu-title">Stok</span>
                         </a>
                     </div>
+                @endrole
+                @role('bendahara|kepala_bidang')
                     <div class="menu-item">
                         <a class="menu-link {{ request()->routeIs('permintaan') ? 'active' : '' }}"
                             href="{{ route('permintaan') }}">

@@ -76,6 +76,11 @@ class PermintaanController extends Controller
         }
     }
 
+    public function show(Permintaan $permintaan)
+    {
+        return view('permintaan.show', compact('permintaan'));
+    }
+
     public function destroy(Permintaan $permintaan)
     {
         try {

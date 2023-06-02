@@ -78,6 +78,12 @@ class PemesananController extends Controller
         }
     }
 
+    public function show(Pemesanan $pemesanan)
+    {
+        $pemesanan->load('barangs.satuan');
+        return view('pemesanan.show', compact('pemesanan'));
+    }
+
     public function destroy(Pemesanan $pemesanan)
     {
         try {
