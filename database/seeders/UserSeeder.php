@@ -21,17 +21,17 @@ class UserSeeder extends Seeder
         ]);
         $user = User::query()->create([
             'nip' => '1253425342432',
-            'name' => 'Wahliyudin',
-            'email' => 'wahliyudin@gmail.com',
+            'name' => 'alifah',
+            'email' => 'alifah@gmail.com',
             'password' => Hash::make(1234567890),
             'role' => Role::BENDAHARA,
         ]);
         $user->pegawai()->create([
             'nip' => 1253425342432,
-            'nama' => 'Wahliyudin',
+            'nama' => 'alifah',
             'jenis_kelamin' => 'L',
             'tempat_lahir' => 'Karawang',
-            'tanggal_lahir' => '2002-12-06',
+            'tanggal_lahir' => '2002-10-01',
             'no_hp' => 1234567890,
             'alamat' => 'sajgsadjgsad',
             'kode_bidang' => $bidang->kode,
