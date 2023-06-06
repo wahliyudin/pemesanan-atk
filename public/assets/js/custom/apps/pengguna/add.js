@@ -40,31 +40,38 @@ var KTModalpenggunaAdd = function () {
             form,
             {
                 fields: {
+                    'nip': {
+                        validators: {
+                            notEmpty: {
+                                message: 'NIP Wajib Diisi!'
+                            }
+                        }
+                    },
                     'name': {
                         validators: {
                             notEmpty: {
-                                message: 'Nama Satuan Wajib Diisi!'
+                                message: 'Nama Wajib Diisi!'
                             }
                         }
                     },
                     'email': {
                         validators: {
                             notEmpty: {
-                                message: 'Nama Satuan Wajib Diisi!'
+                                message: 'Email Wajib Diisi!'
                             }
                         }
                     },
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'Nama Satuan Wajib Diisi!'
+                                message: 'Password Wajib Diisi!'
                             }
                         }
                     },
                     'role': {
                         validators: {
                             notEmpty: {
-                                message: 'Nama Satuan Wajib Diisi!'
+                                message: 'Role Wajib Diisi!'
                             }
                         }
                     },
@@ -103,6 +110,7 @@ var KTModalpenggunaAdd = function () {
                             type: kode ? "PUT" : "POST",
                             url: kode ? `/pengguna/${kode}/update` : "/pengguna/store",
                             data: {
+                                nip: form.querySelector('[name="nip"]').value,
                                 name: form.querySelector('[name="name"]').value,
                                 email: form.querySelector('[name="email"]').value,
                                 password: form.querySelector('[name="password"]').value,
@@ -217,6 +225,7 @@ var KTModalpenggunaAdd = function () {
         $('.add_pengguna').click(function (e) {
             e.preventDefault();
             $(submitButton).data('kode', '');
+            $(form.querySelector('[name="nip"]')).val('');
             $(form.querySelector('[name="name"]')).val('');
             $(form.querySelector('[name="email"]')).val('');
             $(form.querySelector('[name="password"]')).val('');

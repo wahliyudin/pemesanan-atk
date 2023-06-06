@@ -3,6 +3,7 @@
 @push('css')
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endpush
+@section('title', 'Permintaan')
 
 @section('toolbar')
     <div class="toolbar" id="kt_toolbar">

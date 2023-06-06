@@ -2,6 +2,7 @@
 
 @push('css')
 @endpush
+@section('title', 'Create | Pemesanan')
 
 @section('toolbar')
     <div class="toolbar" id="kt_toolbar">

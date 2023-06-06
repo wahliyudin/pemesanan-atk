@@ -38,6 +38,10 @@ var KTSatuansList = function () {
             },
             columns: [
                 {
+                    name: 'nip',
+                    data: 'nip',
+                },
+                {
                     name: 'name',
                     data: 'name',
                 },
@@ -147,6 +151,7 @@ var KTSatuansList = function () {
                     url: `/pengguna/${kode}/edit`,
                     dataType: "JSON",
                     success: function (response) {
+                        $(form.querySelector('[name="nip"]')).val(response.nip);
                         $(form.querySelector('[name="name"]')).val(response.name);
                         $(form.querySelector('[name="email"]')).val(response.email);
                         $(form.querySelector('[name="role"]')).val(response.role).trigger('change');

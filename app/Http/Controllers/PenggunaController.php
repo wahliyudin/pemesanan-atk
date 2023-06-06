@@ -32,9 +32,12 @@ class PenggunaController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'unique:users,email'
+                'email' => 'unique:users,email',
+                'nip' => 'required',
+                'name' => 'required',
             ]);
             User::query()->create([
+                'nip' => $request->nip,
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -53,6 +56,7 @@ class PenggunaController extends Controller
         try {
             return response()->json([
                 'kode' => $user->getKey(),
+                'nip' => $user->nip,
                 'name' => $user->name,
                 'email' => $user->email,
                 'password' => $user->password,
@@ -67,10 +71,13 @@ class PenggunaController extends Controller
     {
         try {
             $request->validate([
-                'email' => "unique:users,email,$user->id,id"
+                'email' => "unique:users,email,$user->id,id",
+                'nip' => 'required',
+                'name' => 'required',
             ]);
             $user->update([
                 'name' => $request->name,
+                'nip' => $request->nip,
                 'email' => $request->email,
                 'password' => $request->password,
                 'role' => $request->role,

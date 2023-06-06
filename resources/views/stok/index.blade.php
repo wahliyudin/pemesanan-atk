@@ -3,7 +3,7 @@
 @push('css')
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endpush
-
+@section('title', 'Stok')
 @section('toolbar')
     <div class="toolbar" id="kt_toolbar">
         <div class=" container-fluid  d-flex flex-stack flex-wrap flex-sm-nowrap">

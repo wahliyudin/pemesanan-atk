@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Laporan')
+
 @section('toolbar')
     <div class="toolbar" id="kt_toolbar">
         <div class=" container-fluid  d-flex flex-stack flex-wrap flex-sm-nowrap">

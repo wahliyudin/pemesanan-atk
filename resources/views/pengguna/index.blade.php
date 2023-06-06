@@ -4,6 +4,8 @@
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 
+@section('title', 'Pengguna')
+
 @section('toolbar')
     <div class="toolbar" id="kt_toolbar">
         <div class=" container-fluid  d-flex flex-stack flex-wrap flex-sm-nowrap">
@@ -82,6 +84,7 @@
                         <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Role</th>
@@ -140,6 +143,17 @@
                             <div class="modal-body py-10 px-lg-17">
                                 <!--begin::Scroll-->
                                 <div class="scroll-y me-n7 pe-7" id="kt_modal_add_pengguna_scroll">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-semibold mb-2">NIP</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input type="number" class="form-control form-control-solid" name="nip" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-7">
                                         <!--begin::Label-->
