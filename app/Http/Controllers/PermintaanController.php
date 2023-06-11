@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Pegawai;
 use App\Models\Permintaan;
+use App\Models\Stok;
 use App\Traits\Helper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -51,6 +52,12 @@ class PermintaanController extends Controller
                 'kode_pemohon' => auth()->user()?->pegawai?->kode,
             ]);
             $permintaan->barangs()->attach($request->kt_products);
+            foreach ($request->kt_products as $value) {
+                $stok = Stok::query()->where('kode_barang', $value['kode_barang'])->first();
+                $stok->update([
+                    'kuantitas' => ($stok->kuantitas - (isset($value['volume']) ? $value['volume'] : 0)),
+                ]);
+            }
             return to_route('permintaan');
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
@@ -69,7 +76,19 @@ class PermintaanController extends Controller
             $permintaan->update([
                 'tanggal' => $request->tanggal,
             ]);
+            foreach ($permintaan->barangs as $barang) {
+                $stok = Stok::query()->where('kode_barang', $barang->kode)->first();
+                $stok->update([
+                    'kuantitas' => ($stok->kuantitas + $barang->pivot?->volume),
+                ]);
+            }
             $permintaan->barangs()->sync($request->kt_products);
+            foreach ($request->kt_products as $value) {
+                $stok = Stok::query()->where('kode_barang', $value['kode_barang'])->first();
+                $stok->update([
+                    'kuantitas' => ($stok->kuantitas - (isset($value['volume']) ? $value['volume'] : 0)),
+                ]);
+            }
             return to_route('permintaan');
         } catch (\Throwable $th) {
             return back()->with('error', 'Something went wrong');
