@@ -103,6 +103,12 @@ class PermintaanController extends Controller
     public function destroy(Permintaan $permintaan)
     {
         try {
+            foreach ($permintaan->barangs as $barang) {
+                $stok = Stok::query()->where('kode_barang', $barang->kode)->first();
+                $stok->update([
+                    'kuantitas' => ($stok->kuantitas + $barang->pivot?->volume),
+                ]);
+            }
             $permintaan->barangs()->sync([]);
             $permintaan->delete();
             return response()->json([
