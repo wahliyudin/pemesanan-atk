@@ -33,7 +33,7 @@ class StokController extends Controller
     {
         try {
             Stok::query()->create([
-                'barang_kode' => $request->barang,
+                'kode_barang' => $request->barang,
                 'kuantitas' => $request->kuantitas,
             ]);
             return response()->json([
@@ -49,7 +49,7 @@ class StokController extends Controller
         try {
             return response()->json([
                 'kode' => $stok->getKey(),
-                'barang_kode' => $stok->barang_kode,
+                'kode_barang' => $stok->kode_barang,
                 'kuantitas' => $stok->kuantitas,
             ]);
         } catch (\Throwable $th) {
@@ -61,7 +61,7 @@ class StokController extends Controller
     {
         try {
             $stok->update([
-                'barang_kode' => $request->barang,
+                'kode_barang' => $request->barang,
                 'kuantitas' => $request->kuantitas,
             ]);
             return response()->json([

@@ -148,7 +148,7 @@ var KTStoksList = function () {
                     url: `/stok/${kode}/edit`,
                     dataType: "JSON",
                     success: function (response) {
-                        $(form.querySelector('[name="barang"]')).val(response.barang_kode).trigger('change');
+                        $(form.querySelector('[name="barang"]')).val(response.kode_barang).trigger('change');
                         form.querySelector('[name="kuantitas"]').value = response.kuantitas;
                         $(submitButton).data('kode', kode);
                         $('#kt_modal_add_stok').modal('show');

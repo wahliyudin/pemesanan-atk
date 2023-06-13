@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('stok', function (Blueprint $table) {
             $table->string('kode')->primary();
-            $table->string('barang_kode');
+            $table->string('kode_barang');
             $table->integer('kuantitas');
             $table->timestamps();
 
-            $table->foreign('barang_kode')->references('kode')->on('barang')->cascadeOnDelete();
+            $table->foreign('kode_barang')->references('kode')->on('barang')->cascadeOnDelete();
         });
     }
 
