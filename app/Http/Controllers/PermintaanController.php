@@ -54,7 +54,7 @@ class PermintaanController extends Controller
             $permintaan->barangs()->attach($request->kt_products);
             foreach ($request->kt_products as $value) {
                 $stok = Stok::query()->where('kode_barang', $value['kode_barang'])->first();
-                $stok->update([
+                $stok?->update([
                     'kuantitas' => ($stok->kuantitas - (isset($value['volume']) ? $value['volume'] : 0)),
                 ]);
             }
@@ -78,14 +78,14 @@ class PermintaanController extends Controller
             ]);
             foreach ($permintaan->barangs as $barang) {
                 $stok = Stok::query()->where('kode_barang', $barang->kode)->first();
-                $stok->update([
+                $stok?->update([
                     'kuantitas' => ($stok->kuantitas + $barang->pivot?->volume),
                 ]);
             }
             $permintaan->barangs()->sync($request->kt_products);
             foreach ($request->kt_products as $value) {
                 $stok = Stok::query()->where('kode_barang', $value['kode_barang'])->first();
-                $stok->update([
+                $stok?->update([
                     'kuantitas' => ($stok->kuantitas - (isset($value['volume']) ? $value['volume'] : 0)),
                 ]);
             }
@@ -105,7 +105,7 @@ class PermintaanController extends Controller
         try {
             foreach ($permintaan->barangs as $barang) {
                 $stok = Stok::query()->where('kode_barang', $barang->kode)->first();
-                $stok->update([
+                $stok?->update([
                     'kuantitas' => ($stok->kuantitas + $barang->pivot?->volume),
                 ]);
             }
